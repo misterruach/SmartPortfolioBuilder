@@ -1,0 +1,1 @@
+import {NextResponse} from 'next/server'; import {requireUser} from '@/lib/auth'; import {rewriteText} from '@/lib/ai'; export async function POST(req:Request){try{await requireUser();const {text,instruction}=await req.json();return NextResponse.json({text:await rewriteText(text,instruction)});}catch(e:any){return NextResponse.json({error:e.message},{status:500});}}
